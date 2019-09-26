@@ -14,7 +14,7 @@ public class LoginServlet extends HttpServlet {
             "</head>\n" +
             "<body>\n" +
 
-            "<form action=\"logout\" method=\"post\">\n" +
+            "<form action=\"login\" method=\"post\">\n" +
             " <h2>Login:</h2>\n" +
             " <input placeholder=\"login\" type=\"text\" name=\"login\">\n" +
             " <h2>Password:</h2>\n" +
@@ -33,10 +33,12 @@ public class LoginServlet extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         if (password.equals(admPassword)){
-            session.setAttribute("logout", login);
-            resp.sendRedirect("/logout");
-            Cookie ck=new Cookie("login","password");
+            session.setAttribute("login", login);
+            Cookie ck=new Cookie("login", login);
+            Cookie ck1 = new Cookie("password", password);
             resp.addCookie(ck);
+            resp.addCookie(ck1);
+            resp.sendRedirect("/mysuperproject_war_exploded/name");
         } else { resp.sendRedirect("/login");
         }
     }
